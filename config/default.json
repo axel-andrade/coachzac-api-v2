@@ -1,0 +1,24 @@
+{
+  "appName": "coachzac",
+  "appId": "coachzacId",
+  "port": 1982,
+  "masterKey": "MMbJdOTYqMFHzlMykknYlkqusyxVebvVJTDeiqVqSpkiSbBMKyQXOuXozzzqoIeZqgsOLkUhusphGsWOgAXcyIxqPkUXSKbHekkiBaavkRfUCIjsGtXvSQcUcyJLkdLR",
+  "server": "http://localhost:1982/use",
+  "databaseUri": "mongodb://localhost:27017/coachzacv2",
+  "FacebookID": [
+    ""
+  ],
+  "colorBG": "#5063F0",
+  "logoImage": "",
+  "termosDeUso": "",
+  "privacy": "",
+  "termosDeUsoBroker": "",
+  "linkPage": "",
+  "docs": "",
+  "geocode": {
+    "provider": "google",
+    "httpAdapter": "https",
+    "apiKey": "AIzaSyBvbijcl2sYbEkTfwMvG-hRNtuZa19F3Go",
+    "formatter": null
+  }
+}

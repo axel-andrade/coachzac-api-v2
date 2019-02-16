@@ -1,0 +1,131 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+</head>
+<body>
+<script src="parse-1.9.2.js"></script>
+<script type="text/javascript">
+    Parse.initialize('FNIDBEI5GWNIDNIDA63OP5WNIDIDIWHNID');
+    //                        Parse.serverURL = 'https://staging-api-trio.herokuapp.com/use';
+    //    Parse.serverURL = 'http://helpy.usemobile.com.br:1982/use';
+    Parse.serverURL = 'https://api.helpy.com.br/use';
+//    Parse.serverURL = 'http://localhost:1982/use';
+    function run(method, params) {
+        Parse.Cloud.run(method, params).then(function (camp) {
+            console.log(camp);
+            if (camp.sessionToken || camp.attributes && camp.attributes.sessionToken) {
+                Parse.User.become(camp.sessionToken || camp.attributes.sessionToken)
+            }
+        }, function (error) {
+            if (error && error.code == 209)
+                Parse.User.logOut();
+            console.log(error);
+        });
+    }
+//     run("logIn", {login: "tuio@usemobile.xyz", password: "usemob2ile"});
+//     run("logIn", {login: "patrick@usemobile.com.br", password: "usemobile"});
+    //        run("logIn", {login: "jhonny@usemobile.com", password: "qwerty"});
+    //              run('listQuestions');
+
+    // var user = new Parse.User();
+    // user.set("name", "Usemobile")
+    // user.set("username", "contato5@usemobile.com.br")
+    // user.set("email", "contato5@usemobile.com.br")
+    // user.set("password", "usemobile")
+    //  user.set("isAdmin", true)
+    // user.save().then(function (ok) {
+    //     console.log(ok);
+    //
+    // }, function (error) {
+    //     console.log(error)
+    // })
+//        run('signUp', {
+//            'email': 'patrick@usemobile.com.br',
+//            'password': 'usemobile',
+//            'userType': 'user',
+//            'level': 'all'
+//        });
+
+</script>
+
+<script type="text/javascript">
+    window.fbAsyncInit = function () {
+        /*FB.init({
+         appId      : '843242869145075',
+         status     : true,
+         xfbml      : true,
+         version    : 'v2.7'
+         });*/
+        Parse.FacebookUtils.init({
+            appId: '188482118471456',
+            status: true,
+            xfbml: true,
+            version: 'v2.7'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<button onclick="loginFacebook()">Facebook</button>
+
+<script>
+    function loginFacebook() {
+        Parse.FacebookUtils.logIn("email", {
+            success: function (user) {
+                console.log(user);
+            },
+            error: function (user, error) {
+                console.log("User cancelled the Facebook login or did not fully authorize.");
+            }
+        });
+    }
+</script>
+<div id="drop_zone">Drop files here</div>
+<output id="list"></output>
+
+<script>
+    function handleFileSelect(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        var files = evt.dataTransfer.files; // FileList object.
+
+        // files is a FileList of File objects. List some properties.
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+            console.log(f);
+            console.log(f.name);
+            console.log(f.type);
+            new Parse.File(f.name, f).save().then(function (result) {
+                        console.log(result);
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+
+            output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                    f.size, ' bytes, last modified: ',
+                    f.lastModifiedDate.toLocaleDateString(), '</li>');
+        }
+        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    }
+
+    function handleDragOver(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+    }
+    // Setup the dnd listeners.
+    var dropZone = document.getElementById('drop_zone');
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelect, false);</script>
+</body>
+</html>
