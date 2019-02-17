@@ -2,11 +2,11 @@
 var Parse = require('parse/node');
 
 Parse.initialize("coachzacId");
-Parse.serverURL = "http://localhost:1982/use";
+Parse.serverURL = "https://coachzac-v2-api.herokuapp.com/use";
 
 let Fundament = new Parse.Object.extend("Fundament");
 let fundament = new Fundament();
-fundament.id = "BGhMVlvFwq";
+fundament.id = "mTSL9axpws";
 
 let steps = [];
 
