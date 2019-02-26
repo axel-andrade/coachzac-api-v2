@@ -46,8 +46,8 @@ var dashboard = new Dashboard({
         }],
     "users": [
         {
-            "user": process.env.APP_NAME,
-            "pass": process.env.APP_NAME + ".0)dash"
+            "user": conf.appName || process.env.APP_NAME,
+            "pass": (conf.appName || process.env.APP_NAME) + ".0)dash"
         }
     ],
     // "iconsFolder": "appicons",
