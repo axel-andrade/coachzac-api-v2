@@ -2,11 +2,12 @@
 var Parse = require('parse/node');
 
 Parse.initialize("coachzacId");
-Parse.serverURL = "https://coachzac-v2-api.herokuapp.com/use";
+//Parse.serverURL = "https://coachzac-v2-api.herokuapp.com/use";
+Parse.serverURL = "http:localhost:1982/use";
 
 let Fundament = new Parse.Object.extend("Fundament");
 let fundament = new Fundament();
-fundament.id = "mTSL9axpws";
+fundament.id = "l8UsH10k2Y";
 
 let steps = [];
 
@@ -91,7 +92,13 @@ for (let i = 0; i < steps.length; i++) {
     step.set("fundament", fundament);
     step.set("isBlocked", false);
 
-    step.save();
+    step.save().then(function(){
+
+    }, function(error){
+        console.log(error.code,error.message)
+    });
+
+    console.log("ENtrou")
 }
 
 
