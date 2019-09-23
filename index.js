@@ -52,7 +52,7 @@ var dashboard = new Dashboard({
     ],
     // "iconsFolder": "appicons",
     "trustProxy": 1
-}, {allowInsecureHTTP: true});
+}, { allowInsecureHTTP: true });
 var app = express();
 process.setMaxListeners(0);
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
